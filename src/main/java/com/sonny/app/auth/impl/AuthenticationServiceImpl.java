@@ -93,7 +93,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
     private void checkPasswords(String password, String confirmPassword) {
         if (password == null || !password.equals(confirmPassword)) {
-            throw new BusinessException(ErrorCode.PASSWORD_MISSMATCH);
+            throw new BusinessException(ErrorCode.PASSWORD_MISMATCH);
         }
     }
 

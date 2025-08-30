@@ -42,7 +42,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public void changePassword(ChangePasswordRequest request, String userId) {
         if (!request.getNewPassword().equals(request.getConfirmNewPassword())) {
-            throw new BusinessException(ErrorCode.CHANGE_PASSWORD_MISSMATCH);
+            throw new BusinessException(ErrorCode.CHANGE_PASSWORD_MISMATCH);
         }
 
         final User savedUser = this.userRepository.findById(userId)
