@@ -75,7 +75,7 @@ public class JwtService {
 
     public String refreshAccessToken(final String refreshToken) {
         final Claims claims = extractClaims(refreshToken);
-        if (claims.get(TOKEN_TYPE).equals("REFRESH_TOKEN")) {
+        if (!claims.get(TOKEN_TYPE).equals("REFRESH_TOKEN")) {
             throw new RuntimeException("Invalid token type");
         }
         if (isTokenExpired(refreshToken)) {
