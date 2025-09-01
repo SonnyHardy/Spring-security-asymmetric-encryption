@@ -1,3 +1,8 @@
+# Project Demo:
+![Project Demo - image1](src/main/resources/images/image1.png)
+
+![Project Demo - image2](src/main/resources/images/image2.png)
+
 # 🔐 JWT Security with Asymmetric Encryption
 
 This guide explains the importance of **asymmetric encryption** in securing JWTs (JSON Web Tokens), how to generate your private/public keys, and compares symmetric and asymmetric encryption approaches.
