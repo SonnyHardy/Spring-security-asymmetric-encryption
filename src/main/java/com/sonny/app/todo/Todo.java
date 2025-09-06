@@ -3,10 +3,7 @@ package com.sonny.app.todo;
 import com.sonny.app.category.Category;
 import com.sonny.app.common.BaseEntity;
 import com.sonny.app.user.User;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -25,12 +22,15 @@ import java.time.LocalTime;
 @Table(name = "TODOS")
 public class Todo extends BaseEntity {
 
+    @Column(nullable = false)
     private String title;
     private String description;
+    @Column(nullable = false)
     private LocalDate startDate;
     private LocalDate endDate;
     private LocalTime startTime;
     private LocalTime endTime;
+    @Column(nullable = false)
     private boolean done;
 
     @ManyToOne

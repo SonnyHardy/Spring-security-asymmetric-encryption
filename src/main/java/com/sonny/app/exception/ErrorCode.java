@@ -18,7 +18,8 @@ public enum ErrorCode {
     USER_DISABLED("USER_DISABLED", "User account is disabled", HttpStatus.UNAUTHORIZED),
     BAD_CREDENTIALS("BAD_CREDENTIALS", "Invalid username or password", HttpStatus.UNAUTHORIZED),
     USERNAME_NOT_FOUND("USERNAME_NOT_FOUND", "Username not found", HttpStatus.NOT_FOUND),
-    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", "An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR);
+    INTERNAL_SERVER_ERROR("INTERNAL_SERVER_ERROR", "An unexpected error occurred", HttpStatus.INTERNAL_SERVER_ERROR),
+    CATEGORY_ALREADY_EXISTS_FOR_USER("CATEGORY_ALREADY_EXISTS_FOR_USER", "Category with name %s already exists for the user", HttpStatus.CONFLICT);
 
     private final String code;
     private final String defaultMessage;
