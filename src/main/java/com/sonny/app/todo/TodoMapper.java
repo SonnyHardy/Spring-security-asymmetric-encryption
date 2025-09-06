@@ -1,6 +1,5 @@
 package com.sonny.app.todo;
 
-import com.sonny.app.category.Category;
 import com.sonny.app.category.response.CategoryResponse;
 import com.sonny.app.todo.request.TodoRequest;
 import com.sonny.app.todo.request.TodoUpdateRequest;
