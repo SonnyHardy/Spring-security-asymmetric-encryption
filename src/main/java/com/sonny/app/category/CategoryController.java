@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class CategoryController {
     }
 
     @PutMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryId)")
     public ResponseEntity<Void> updateCategory(
             @RequestBody @Valid
             final CategoryUpdateRequest request,
@@ -57,6 +59,7 @@ public class CategoryController {
     }
 
     @GetMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryId)")
     public ResponseEntity<CategoryResponse> findCategoryById(
             @PathVariable("category-id")
             final String categoryId
@@ -65,6 +68,7 @@ public class CategoryController {
     }
 
     @DeleteMapping("/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryId)")
     public ResponseEntity<Void> deleteCategoryById(
             @PathVariable("category-id")
             final String categoryId

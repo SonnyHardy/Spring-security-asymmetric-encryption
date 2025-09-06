@@ -10,6 +10,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
@@ -36,6 +37,7 @@ public class TodoController {
     }
 
     @PutMapping("/{todo-id}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoId)")
     public ResponseEntity<RestResponse> updateTodo(
             @RequestBody @Valid
             final TodoUpdateRequest request,
@@ -49,6 +51,7 @@ public class TodoController {
     }
 
     @GetMapping("/{todo-id}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoId)")
     public ResponseEntity<TodoResponse> findTodoById(@PathVariable("todo-id") String todoId) {
         return  ResponseEntity.ok(todoService.findTodoById(todoId));
     }
@@ -60,6 +63,7 @@ public class TodoController {
     }
 
     @GetMapping("/category/{category-id}")
+    @PreAuthorize("@categorySecurityService.isCategoryOwner(#categoryId)")
     public ResponseEntity<List<TodoResponse>> findAllTodosByCategory(
             @PathVariable("category-id")
             String categoryId,
@@ -76,6 +80,7 @@ public class TodoController {
     }
 
     @DeleteMapping("/{todo-id}")
+    @PreAuthorize("@todoSecurityService.isTodoOwner(#todoId)")
     public  ResponseEntity<RestResponse> deleteTodoById(@PathVariable("todo-id") String todoId) {
         this.todoService.deleteTodoById(todoId);
         return ResponseEntity.ok().build();

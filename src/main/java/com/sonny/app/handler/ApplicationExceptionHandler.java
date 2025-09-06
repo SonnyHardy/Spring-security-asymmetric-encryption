@@ -9,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.DisabledException;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -43,6 +44,7 @@ public class ApplicationExceptionHandler {
                 .code(ErrorCode.USER_DISABLED.getCode())
                 .message(ErrorCode.USER_DISABLED.getDefaultMessage())
                 .build();
+        log.error("DisabledException: [{}]", e.getMessage());
         return ResponseEntity.status(ErrorCode.USER_DISABLED.getHttpStatus())
                 .body(body);
     }
@@ -66,6 +68,16 @@ public class ApplicationExceptionHandler {
                 .message(ErrorCode.USERNAME_NOT_FOUND.getDefaultMessage())
                 .build();
         return new ResponseEntity<>(body, HttpStatus.NOT_FOUND);
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ErrorResponse> handleException(AuthorizationDeniedException e) {
+        log.debug(e.getMessage(), e);
+        final ErrorResponse body = ErrorResponse.builder()
+                .code("UNAUTHORIZED")
+                .message("You are not authorized to perform this operation.")
+                .build();
+        return new ResponseEntity<>(body, HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(EntityNotFoundException.class)
@@ -101,11 +113,23 @@ public class ApplicationExceptionHandler {
                 .body(errorResponse);
     }
 
+    @ExceptionHandler(RuntimeException.class)
+    public ResponseEntity<ErrorResponse> handleException(RuntimeException e) {
+        log.error(e.getMessage(), e);
+        final ErrorResponse body = ErrorResponse.builder()
+                .code(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
+                .message(ErrorCode.INTERNAL_SERVER_ERROR.getDefaultMessage())
+                .build();
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+                .body(body);
+    }
+
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ErrorResponse> handleException(Exception e) {
         log.error(e.getMessage(), e);
         final ErrorResponse body = ErrorResponse.builder()
-                .code(ErrorCode.INTERNAL_SERVER_ERROR.getCode())
+                .code("UNAUTHORIZED")
                 .message(ErrorCode.INTERNAL_SERVER_ERROR.getDefaultMessage())
                 .build();
 
