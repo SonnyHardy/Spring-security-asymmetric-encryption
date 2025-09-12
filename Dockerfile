@@ -24,7 +24,7 @@ COPY --from=build /app/target/spring-security-asymmetric-encryption-0.0.1-SNAPSH
 #COPY src/main/resources/keys /app/keys
 
 # Create the keys directory (the files will be mounted by Cloud Run)
-RUN mkdir -p /app/keys
+RUN mkdir -p /app/keys/local-only
 
 # Port for the HTTP-Server
 EXPOSE 8080
