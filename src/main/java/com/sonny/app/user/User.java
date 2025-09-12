@@ -1,6 +1,7 @@
 package com.sonny.app.user;
 
 import com.sonny.app.role.Role;
+import com.sonny.app.todo.Todo;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.data.annotation.CreatedDate;
@@ -86,6 +87,9 @@ public class User implements UserDetails {
             }
     )
     private List<Role> roles;
+
+    @OneToMany(mappedBy = "user")
+    private List<Todo> todos;
 
 
     @Override
