@@ -36,3 +36,5 @@ build/
 .env
 private_key.pem
 public_key.pem
+.env.private_key
+.env.public_key

@@ -3,7 +3,8 @@ spring:
     name: spring-security-asymmetric-encryption
 
   config:
-    import: optional:file:.env[.properties]
+    import: optional:file:.env[.properties],optional:file:.env.private_key[.properties],optional:file:.env.public_key[.properties]
+
 
   datasource:
     #url: jdbc:postgresql://${DB_HOST}:${DB_PORT}/${DB_NAME}
@@ -24,6 +25,8 @@ spring:
 
 app:
   security:
+    private-key: ${PRIVATE_KEY}
+    public-key: ${PUBLIC_KEY}
     jwt:
       access-token-expiration: 900000 # 15 minutes
       refresh-token-expiration: 3600000 # 1 hour

@@ -3,6 +3,8 @@ package com.sonny.app.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;
+import lombok.AllArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
@@ -23,9 +25,11 @@ public class JwtService {
     private long refreshTokenExpiration;
 
 
-    public JwtService() throws Exception {
-        this.privateKey = KeyUtils.loadPrivateKey("keys/local-only/private_key.pem");
-        this.publicKey = KeyUtils.loadPublicKey("keys/local-only/public_key.pem");
+    public JwtService(KeyUtils keyUtils) throws Exception {
+        //this.privateKey = KeyUtils.loadPrivateKey("keys/local-only/private_key.pem");
+        //this.publicKey = KeyUtils.loadPublicKey("keys/local-only/public_key.pem");
+        this.privateKey = keyUtils.loadPrivateKey();
+        this.publicKey = keyUtils.loadPublicKey();
     }
 
     public String generateAccessToken(final String username) {
