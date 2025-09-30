@@ -32,7 +32,7 @@ import io.swagger.v3.oas.annotations.servers.Server;
                         description = "Local environment"
                 ),
                 @Server(
-                        url = "https://example.com",
+                        url = "https://spring-security-488816087046.europe-west1.run.app",
                         description = "Production environment"
                 )
         },
