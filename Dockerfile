@@ -21,7 +21,7 @@ WORKDIR /app
 # Copy the built JAR file from the build stage
 COPY --from=build /app/target/spring-security-asymmetric-encryption-0.0.1-SNAPSHOT.jar /app/
 #COPY .env .env
-COPY src/main/resources/keys /app/keys
+#COPY src/main/resources/keys /app/keys
 
 # Port for the HTTP-Server
 EXPOSE 8080
