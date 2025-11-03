@@ -28,12 +28,12 @@ import io.swagger.v3.oas.annotations.servers.Server;
         ),
         servers = {
                 @Server(
-                        url = "http://localhost:8080",
-                        description = "Local environment"
+                        url = "https://spring-security-asymmetric-encryption-488816087046.europe-west1.run.app",
+                        description = "Production environment"
                 ),
                 @Server(
-                        url = "https://spring-security-488816087046.europe-west1.run.app",
-                        description = "Production environment"
+                        url = "http://localhost:8080",
+                        description = "Local environment"
                 )
         },
         security = {
