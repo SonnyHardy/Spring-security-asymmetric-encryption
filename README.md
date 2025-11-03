@@ -1,4 +1,4 @@
-# Project Demo:  [Demo link](https://spring-security-488816087046.europe-west1.run.app/swagger-ui/index.html)
+# Project Demo:  [Demo link](https://spring-security-asymmetric-encryption-488816087046.europe-west1.run.app/swagger-ui/index.html)
 
 ![Project Demo - image1](src/main/resources/images/image1.png)
 
